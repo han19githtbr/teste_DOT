@@ -1,40 +1,848 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Plataforma EdTech — DOT Digital Group" />
     <title>DOT Digital Group — EdTech</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap"
-        rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap"
+      rel="stylesheet"
     />
 
     <link rel="stylesheet" href="css/styles.css" />
-</head>
-<body>
-    
-    <header>
+  </head>
+  <body>
+    <!-- ============================================================
+       HEADER
+       ============================================================ -->
 
+    <header class="site-header" role="banner">
+      <div class="container site-header__inner">
+        <a
+          href="#"
+          class="site-header__logo"
+          aria-label="DOT Digital Group — página inicial"
+        >
+          <div class="logo-wrap">
+            <div class="logo-mark">
+              dot<span class="logo-dot" aria-hidden="true"></span>
+            </div>
+            <div class="logo-sub" aria-hidden="true">DIGITAL<br />GROUP</div>
+          </div>
+        </a>
+      </div>
     </header>
 
-    <section>
+    <!-- ============================================================
+       HERO SECTION
+       ============================================================ -->
 
+    <section class="hero" aria-labelledby="hero-heading">
+      <svg
+        class="hero__curves"
+        aria-hidden="true"
+        viewBox="0 0 1280 660"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+      >
+        <ellipse
+          cx="1100"
+          cy="120"
+          rx="320"
+          ry="320"
+          fill="none"
+          stroke="rgba(127,195,28,0.18)"
+          stroke-width="1"
+        />
+        <path
+          d="M -80 380 Q 400 100 900 300 Q 1150 420 1350 200"
+          fill="none"
+          stroke="rgba(127,195,28,0.25)"
+          stroke-width="1.5"
+        />
+        <path
+          d="M -50 500 Q 300 200 750 350 Q 1050 450 1300 280"
+          fill="none"
+          stroke="rgba(127,195,28,0.12)"
+          stroke-width="1"
+        />
+      </svg>
+
+      <div class="hero__inner">
+        <div class="hero__text-col">
+          <h1 id="hero-heading" class="hero__heading">
+            Lorem ipsum<br />
+            dolor, sit <em>amet</em>
+          </h1>
+          <p class="hero__subtitle">
+            It is a long established fact that a reader will be distracted by
+            the readable content of a page when looking at its layout.
+          </p>
+          <a
+            href="#conteudo"
+            class="hero__cta"
+            aria-label="Acessar o conteúdo do curso"
+          >
+            Lorem Ipsum <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="hero__mockup" aria-hidden="true" role="presentation">
+          <div class="mockup-topbar">
+            <div class="mockup-dot mockup-dot--red"></div>
+            <div class="mockup-dot mockup-dot--yellow"></div>
+            <div class="mockup-dot mockup-dot--green"></div>
+            <div class="mockup-topbar-lines">
+              <div class="mockup-topbar-line"></div>
+            </div>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-sidebar">
+              <div class="mockup-sidebar-item" style="width: 80%"></div>
+              <div class="mockup-sidebar-item" style="width: 60%"></div>
+            </div>
+            <div class="mockup-content">
+              <div class="mockup-chart">
+                <svg
+                  viewBox="0 0 200 60"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <polygon
+                    fill="rgba(127,195,28,.15)"
+                    points="0,60 0,55 20,45 45,48 70,30 90,35 120,20 150,15 175,8 200,5 200,60"
+                  />
+                  <polyline
+                    fill="none"
+                    stroke="#7fc31c"
+                    stroke-width="2"
+                    points="0,55 20,45 45,48 70,30 90,35 120,20 150,15 175,8 200,5"
+                  />
+                </svg>
+              </div>
+              <div class="mockup-cards">
+                <div class="mockup-card-item"></div>
+                <div class="mockup-card-item"></div>
+              </div>
+              <div class="mockup-btn-fake"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <main>
+    <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+    <main id="conteudo" class="main-content" role="main">
+      <div class="container">
+        <!-- ── SEÇÃO 1: Título + Player de Vídeo ─────────────────── -->
+        <section class="section-block" aria-labelledby="section-video-title">
+          <h2 id="section-video-title" class="section-title">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit
+          </h2>
+          <p class="section-subtitle">
+            It is a long established fact that a reader will be distracted by
+            the readable content of a page when looking at its layout.
+          </p>
 
+          <div class="video-player-wrap">
+            <div class="video-player" data-video-id="LXb3EKWsInQ">
+              <div class="video-player__preview" data-role="preview">
+                <img
+                  src="https://img.youtube.com/vi/LXb3EKWsInQ/maxresdefault.jpg"
+                  alt="Preview do vídeo de apresentação do curso"
+                  loading="lazy"
+                  onerror="
+                    this.src =
+                      'https://img.youtube.com/vi/LXb3EKWsInQ/hqdefault.jpg'
+                  "
+                />
+                <button
+                  class="video-player__preview-btn"
+                  type="button"
+                  aria-label="Reproduzir vídeo"
+                >
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="white"
+                    aria-hidden="true"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </button>
+              </div>
+              <div
+                class="video-player__iframe"
+                data-role="iframe"
+                aria-hidden="true"
+              ></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── SEÇÃO 2: Imagem Lateral ───────────────────────────── -->
+        <section class="section-block" aria-label="Conteúdo com imagem lateral">
+          <div class="image-text-block">
+            <img
+              class="image-text-block__img"
+              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
+              alt="Vista aérea de uma praia com ondas azuis"
+              loading="lazy"
+            />
+            <div class="image-text-block__body">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
+                voluptatibus aperiam nam quasi repudiandae nostrum, sed amet
+                quam nescient eum consectetur ipse dolores iusto dicimus
+                consequuntur facere!
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Molestiae, quid! Cumque ipsum harum fuga perferendis autem
+                incidunt dolorem voluptatem illo, quo explicabo. Possimus
+                repudiandae dolore architecto.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── SEÇÃO 3: Slider de Imagens ───────────────────────── -->
+        <section class="section-block" aria-label="Galeria de imagens">
+          <div class="slider-section">
+            <div
+              class="slider"
+              role="region"
+              aria-label="Carrossel de imagens"
+              aria-roledescription="carrossel"
+            >
+              <div class="slider__track">
+                <div
+                  class="slider__slide"
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label="Slide 1 de 3"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80"
+                    alt="Floresta densa"
+                    loading="lazy"
+                  />
+                </div>
+                <div
+                  class="slider__slide"
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label="Slide 2 de 3"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80"
+                    alt="Montanhas nevadas"
+                    loading="lazy"
+                  />
+                </div>
+                <div
+                  class="slider__slide"
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label="Slide 3 de 3"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=80"
+                    alt="Campo verde com lago"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <div
+                class="slider__controls"
+                role="group"
+                aria-label="Controles do carrossel"
+              >
+                <button
+                  class="slider__btn slider__btn--prev"
+                  aria-label="Slide anterior"
+                  disabled
+                >
+                  &#8249;
+                </button>
+                <div
+                  class="slider__dots"
+                  role="tablist"
+                  aria-label="Selecionar slide"
+                ></div>
+                <button
+                  class="slider__btn slider__btn--next"
+                  aria-label="Próximo slide"
+                >
+                  &#8250;
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── SEÇÃO 4: Recurso de Destaque ─────────────────────── -->
+        <section class="section-block" aria-label="Recurso de destaque">
+          <div class="highlight-block" role="note">
+            <p>
+              <strong
+                >Lorem, ipsum dolor sit amet consectetur adipisicing
+                elit.</strong
+              >
+              Labore nihil corporis sapiente Lorem, ipsum dolor id consequuntur.
+              Tenetur nescient ducimus matores sequi veritatis nostrum, esse
+              eaque delectus ex laboriosam repellendus ipsum natus, mollitia
+              facilis praesentium cupiditate quidem eaque itaque nulla ab
+              obcaecati sapiente sequi porro, totan, non molestias excepturi
+              explicabo adipisci dolenti architecto animi.
+            </p>
+          </div>
+        </section>
+
+        <!-- ── SEÇÃO 5: Cards Interativos ───────────────────────── -->
+        <section class="section-block" aria-label="Cards interativos">
+          <div class="interactive-cards">
+            <article class="icard" aria-label="Card interativo 1">
+              <div class="icard__front">
+                <div class="icard__icon" aria-hidden="true">?</div>
+                <span class="icard__label">Abrir</span>
+              </div>
+              <button
+                type="button"
+                class="icard__open-btn"
+                aria-expanded="false"
+                aria-controls="icard-back-1"
+              >
+                Abrir
+              </button>
+              <div id="icard-back-1" class="icard__back" aria-hidden="true">
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
+                  excepturi, dolores perspiciatis commodi eum dolore nescunt
+                  tempore similique at quas.
+                </p>
+                <button type="button" class="icard__close-btn">Fechar</button>
+              </div>
+            </article>
+
+            <article class="icard is-open" aria-label="Card interativo 2">
+              <div class="icard__front">
+                <div class="icard__icon" aria-hidden="true">?</div>
+                <span class="icard__label">Abrir</span>
+              </div>
+              <button
+                type="button"
+                class="icard__open-btn"
+                aria-expanded="true"
+                aria-controls="icard-back-2"
+              >
+                Abrir
+              </button>
+              <div id="icard-back-2" class="icard__back" aria-hidden="false">
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
+                  excepturi, dolores perspiciatis commodi eum dolore nescunt
+                  tempore similique at quas.
+                </p>
+                <button type="button" class="icard__close-btn">Fechar</button>
+              </div>
+            </article>
+
+            <article class="icard" aria-label="Card interativo 3">
+              <div class="icard__front">
+                <div class="icard__icon" aria-hidden="true">?</div>
+                <span class="icard__label">Abrir</span>
+              </div>
+              <button
+                type="button"
+                class="icard__open-btn"
+                aria-expanded="false"
+                aria-controls="icard-back-3"
+              >
+                Abrir
+              </button>
+              <div id="icard-back-3" class="icard__back" aria-hidden="true">
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
+                  excepturi, dolores perspiciatis commodi eum dolore nescunt
+                  tempore similique at quas.
+                </p>
+                <button type="button" class="icard__close-btn">Fechar</button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ── SEÇÃO 6: Título + Áudio + Atividades ──────────────── -->
+        <section
+          class="section-block"
+          aria-labelledby="section-activities-title"
+        >
+          <h2 id="section-activities-title" class="section-title">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit
+          </h2>
+          <p class="section-subtitle">
+            It is a long established fact that a reader will be distracted by
+            the readable content of a page when looking at its layout.
+          </p>
+
+          <!-- ── Player de Áudio — fundo branco estilo Figma ──────── -->
+          <div class="section-block">
+            <div
+              class="audio-player"
+              role="region"
+              aria-label="Player de áudio"
+            >
+              <audio
+                aria-hidden="true"
+                src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+                preload="none"
+              ></audio>
+
+              <button class="audio-player__play-btn" aria-label="Reproduzir">
+                <svg
+                  class="icon-play"
+                  width="11"
+                  height="11"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+                <svg
+                  class="icon-pause"
+                  width="11"
+                  height="11"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                  style="display: none"
+                >
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                </svg>
+              </button>
+
+              <div
+                class="audio-player__progress"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+                aria-label="Progresso do áudio"
+                tabindex="0"
+              >
+                <div class="audio-player__progress-fill"></div>
+              </div>
+
+              <span class="audio-player__time" aria-live="off"
+                >0:00 / 0:00</span
+              >
+
+              <button class="audio-player__vol-btn" aria-label="Volume">
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"
+                  />
+                </svg>
+              </button>
+
+              <div class="audio-player__vol-slider">
+                <div class="audio-player__vol-track">
+                  <div class="audio-player__vol-fill"></div>
+                </div>
+              </div>
+
+              <button
+                class="audio-player__settings-btn"
+                aria-label="Configurações"
+              >
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.56-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.63-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.03-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- ── Atividade Discursiva — fundo branco ───────────────── -->
+          <div class="section-block">
+            <div
+              class="activity activity--essay"
+              aria-label="Atividade discursiva"
+            >
+              <div class="activity__header">
+                <div
+                  class="activity__icon activity__icon--essay"
+                  aria-hidden="true"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                    />
+                  </svg>
+                </div>
+                <div class="activity__header-text">
+                  <h3>Atividade discursiva</h3>
+                  <p>
+                    It is a long established fact that a reader will be
+                    distracted by the readable content of a page when looking at
+                    its layout.
+                  </p>
+                </div>
+              </div>
+
+              <div class="activity__body">
+                <label for="essay-textarea" class="sr-only"
+                  >Digite sua resposta aqui</label
+                >
+                <textarea
+                  id="essay-textarea"
+                  class="activity__textarea"
+                  placeholder="Digite sua resposta aqui..."
+                  rows="4"
+                  aria-required="true"
+                ></textarea>
+
+                <div
+                  class="activity__actions"
+                  role="group"
+                  aria-label="Ações da atividade"
+                >
+                  <button
+                    class="btn btn--outline btn--answer-essay"
+                    aria-label="Enviar resposta"
+                  >
+                    Responder
+                  </button>
+                  <button
+                    class="btn btn--solid btn--change-essay"
+                    disabled
+                    aria-label="Alterar resposta"
+                  >
+                    Alterar
+                  </button>
+                </div>
+
+                <div
+                  class="activity__feedback activity__feedback--correct"
+                  role="alert"
+                  aria-live="polite"
+                >
+                  <div class="activity__feedback-header">
+                    <span class="activity__feedback-title">É isso aí!</span>
+                    <button
+                      class="activity__feedback-close"
+                      type="button"
+                      aria-label="Fechar"
+                    >
+                      ×
+                    </button>
+                  </div>
+                  <span class="activity__feedback-body">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Pariatur commodo odio maiores accusamus aspernatur
+                    consequatur ipsam dignissimos magnam hic, velit est
+                    perferendis explicabo aperiam ratione veritatis labore.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Atividade Objetiva — fundo branco ──────────────────── -->
+          <div class="section-block">
+            <div
+              class="activity activity--quiz"
+              aria-label="Atividade objetiva"
+            >
+              <div class="activity__header">
+                <div
+                  class="activity__icon activity__icon--quiz"
+                  aria-hidden="true"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"
+                    />
+                  </svg>
+                </div>
+                <div class="activity__header-text">
+                  <h3>Atividade Objetiva</h3>
+                  <p>
+                    It is a long established fact that a reader will be
+                    distracted by the readable content of a page.
+                  </p>
+                </div>
+              </div>
+
+              <div class="activity__body">
+                <fieldset class="quiz-options" aria-label="Opções de resposta">
+                  <legend class="sr-only">Selecione a resposta correta</legend>
+
+                  <label class="quiz-option" data-index="0" tabindex="0">
+                    <input type="checkbox" name="quiz" value="0" />
+                    <span class="quiz-option__box" aria-hidden="true"></span>
+                    <span class="quiz-option__text"
+                      >A) Lorem Ipsum is simply dummy text of the printing and
+                      typesetting industry.</span
+                    >
+                  </label>
+
+                  <label
+                    class="quiz-option"
+                    data-index="1"
+                    data-correct="true"
+                    tabindex="0"
+                  >
+                    <input type="checkbox" name="quiz" value="1" />
+                    <span class="quiz-option__box" aria-hidden="true"></span>
+                    <span class="quiz-option__text"
+                      >B) Lorem Ipsum is simply dummy text of the printing and
+                      typesetting industry.</span
+                    >
+                  </label>
+
+                  <label class="quiz-option" data-index="2" tabindex="0">
+                    <input type="checkbox" name="quiz" value="2" />
+                    <span class="quiz-option__box" aria-hidden="true"></span>
+                    <span class="quiz-option__text"
+                      >C) Lorem Ipsum is simply dummy text of the printing and
+                      typesetting industry.</span
+                    >
+                  </label>
+
+                  <label class="quiz-option" data-index="3" tabindex="0">
+                    <input type="checkbox" name="quiz" value="3" />
+                    <span class="quiz-option__box" aria-hidden="true"></span>
+                    <span class="quiz-option__text"
+                      >D) Lorem Ipsum is simply dummy text of the printing and
+                      typesetting industry.</span
+                    >
+                  </label>
+                </fieldset>
+
+                <div
+                  class="activity__actions"
+                  role="group"
+                  aria-label="Ações da atividade objetiva"
+                >
+                  <button
+                    class="btn btn--outline btn--answer-quiz"
+                    disabled
+                    aria-label="Enviar resposta objetiva"
+                  >
+                    Responder
+                  </button>
+                  <button
+                    class="btn btn--solid btn--change-quiz"
+                    disabled
+                    aria-label="Alterar resposta objetiva"
+                  >
+                    Alterar
+                  </button>
+                </div>
+
+                <div class="activity__feedback" role="alert" aria-live="polite">
+                  <div class="activity__feedback-header">
+                    <span class="activity__feedback-title"></span>
+                    <button
+                      class="activity__feedback-close"
+                      type="button"
+                      aria-label="Fechar"
+                    >
+                      ×
+                    </button>
+                  </div>
+                  <span class="activity__feedback-body"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── FAQ / Accordion ──────────────────────────────────── -->
+          <div class="section-block">
+            <div class="faq-list" role="list">
+              <div class="faq-item" role="listitem">
+                <details open>
+                  <summary class="faq-item__trigger">
+                    Lorem ipsum is simply dummy text of the printing and
+                    typesetting industry.
+                    <span class="faq-item__icon" aria-hidden="true"
+                      ><svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M7 10l5 5 5-5z" /></svg
+                    ></span>
+                  </summary>
+                  <div class="faq-item__panel">
+                    <p>
+                      It is a long established fact that a reader will be
+                      distracted by the readable content of a page when looking
+                      at its layout. Lorem ipsum, content here, content here,
+                      making it look like readable English.
+                    </p>
+                  </div>
+                </details>
+              </div>
+
+              <div class="faq-item" role="listitem">
+                <details>
+                  <summary class="faq-item__trigger">
+                    Lorem ipsum is simply dummy text of the printing and
+                    typesetting industry.
+                    <span class="faq-item__icon" aria-hidden="true"
+                      ><svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M7 10l5 5 5-5z" /></svg
+                    ></span>
+                  </summary>
+                  <div class="faq-item__panel">
+                    <p>
+                      It is a long established fact that a reader will be
+                      distracted by the readable content of a page when looking
+                      at its layout.
+                    </p>
+                  </div>
+                </details>
+              </div>
+
+              <div class="faq-item" role="listitem">
+                <details>
+                  <summary class="faq-item__trigger">
+                    Lorem ipsum is simply dummy text of the printing and
+                    typesetting industry.
+                    <span class="faq-item__icon" aria-hidden="true"
+                      ><svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M7 10l5 5 5-5z" /></svg
+                    ></span>
+                  </summary>
+                  <div class="faq-item__panel">
+                    <p>
+                      It is a long established fact that a reader will be
+                      distracted by the readable content of a page when looking
+                      at its layout.
+                    </p>
+                  </div>
+                </details>
+              </div>
+
+              <div class="faq-item" role="listitem">
+                <details>
+                  <summary class="faq-item__trigger">
+                    Lorem ipsum is simply dummy text of the printing and
+                    typesetting industry.
+                    <span class="faq-item__icon" aria-hidden="true"
+                      ><svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M7 10l5 5 5-5z" /></svg
+                    ></span>
+                  </summary>
+                  <div class="faq-item__panel">
+                    <p>
+                      It is a long established fact that a reader will be
+                      distracted by the readable content of a page when looking
+                      at its layout.
+                    </p>
+                  </div>
+                </details>
+              </div>
+
+              <div class="faq-item" role="listitem">
+                <details>
+                  <summary class="faq-item__trigger">
+                    Lorem ipsum is simply dummy text of the printing and
+                    typesetting industry.
+                    <span class="faq-item__icon" aria-hidden="true"
+                      ><svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M7 10l5 5 5-5z" /></svg
+                    ></span>
+                  </summary>
+                  <div class="faq-item__panel">
+                    <p>
+                      It is a long established fact that a reader will be
+                      distracted by the readable content of a page when looking
+                      at its layout.
+                    </p>
+                  </div>
+                </details>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
 
-    <footer>
-
+    <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="container site-footer__inner">
+        <a href="#" class="site-header__logo" aria-label="DOT Digital Group">
+          <div class="logo-wrap">
+            <div class="logo-mark">
+              dot<span class="logo-dot" aria-hidden="true"></span>
+            </div>
+            <div class="logo-sub" aria-hidden="true">DIGITAL<br />GROUP</div>
+          </div>
+        </a>
+        <p class="site-footer__copyright">
+          <small>© 2026 DOT Digital Group. Todos os direitos reservados.</small>
+        </p>
+      </div>
     </footer>
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/main.js"></script>
-</body>
+  </body>
 </html>
