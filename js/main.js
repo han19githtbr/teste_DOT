@@ -114,6 +114,30 @@ function initSlider() {
 }
 
 /* ============================================================
+   PLAYER DE ÁUDIO — helper painel de velocidade
+   ============================================================ */
+function createSpeedPanel(playerEl) {
+  const panel = document.createElement('div');
+  panel.className = 'audio-player__speed-panel';
+  panel.setAttribute('role', 'menu');
+  panel.setAttribute('aria-label', 'Velocidade de reprodução');
+
+  const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
+  speeds.forEach((s) => {
+    const btn = document.createElement('button');
+    btn.className = 'speed-option' + (s === 1 ? ' is-active' : '');
+    btn.dataset.speed = s;
+    btn.textContent = s === 1 ? '1× (Normal)' : `${s}×`;
+    btn.setAttribute('role', 'menuitem');
+    panel.appendChild(btn);
+  });
+
+  playerEl.style.position = 'relative';
+  playerEl.appendChild(panel);
+  return panel;
+}
+
+/* ============================================================
    PLAYER DE ÁUDIO
    ============================================================ */
 function initAudioPlayer() {
@@ -151,13 +175,15 @@ function initAudioPlayer() {
     },
     onplay: () => {
       setPlaying(true);
-      requestAnimationFrame(updateProgress);
+      startProgressLoop();
     },
     onpause: () => {
       setPlaying(false);
+      stopProgressLoop();
     },
     onend: () => {
       setPlaying(false);
+      stopProgressLoop();
       fill.style.width = '0%';
       timeEl.textContent = `0:00 / ${formatTime(player.duration())}`;
     },
@@ -181,15 +207,26 @@ function initAudioPlayer() {
     playerEl.classList.toggle('is-playing', isPlaying);
   }
 
-  function updateProgress() {
-    if (!player.playing()) return;
-    const current = player.seek() || 0;
-    const duration = player.duration() || 0;
-    const percent = duration ? (current / duration) * 100 : 0;
-    fill.style.width = `${percent}%`;
-    progressBar.setAttribute('aria-valuenow', Math.round(percent));
-    timeEl.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
-    requestAnimationFrame(updateProgress);
+  // Loop de progresso robusto: usa RAF com cancelamento explícito
+  // para não depender de player.playing() como guard (pode ser false momentaneamente após seek)
+  let rafId = null;
+
+  function startProgressLoop() {
+    if (rafId) return;
+    function loop() {
+      const current  = typeof player.seek() === 'number' ? player.seek() : 0;
+      const duration = player.duration() || 0;
+      const percent  = duration ? (current / duration) * 100 : 0;
+      fill.style.width = `${percent}%`;
+      progressBar.setAttribute('aria-valuenow', Math.round(percent));
+      timeEl.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
+      rafId = requestAnimationFrame(loop);
+    }
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function stopProgressLoop() {
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
   }
 
   playBtn.addEventListener('click', (e) => {
@@ -206,13 +243,51 @@ function initAudioPlayer() {
     }
   });
 
-  progressBar.addEventListener('click', (event) => {
+  function seekToEvent(clientX) {
     const duration = player.duration() || 0;
     if (!duration) return;
     const rect = progressBar.getBoundingClientRect();
-    const pct  = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+    const pct  = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     player.seek(pct * duration);
-    updateProgress();
+    fill.style.width = `${pct * 100}%`;
+    timeEl.textContent = `${formatTime(pct * duration)} / ${formatTime(duration)}`;
+  }
+
+  let isDragging = false;
+
+  progressBar.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    seekToEvent(e.clientX);
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    seekToEvent(e.clientX);
+  });
+
+  document.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    // Após soltar, garante que o loop continua se o player estava tocando
+    if (player.playing()) { stopProgressLoop(); startProgressLoop(); }
+  });
+
+  progressBar.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    seekToEvent(e.touches[0].clientX);
+    e.preventDefault();
+  }, { passive: false });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    seekToEvent(e.touches[0].clientX);
+  }, { passive: true });
+
+  document.addEventListener('touchend', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    if (player.playing()) { stopProgressLoop(); startProgressLoop(); }
   });
 
   progressBar.addEventListener('keydown', (event) => {
@@ -222,12 +297,10 @@ function initAudioPlayer() {
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       player.seek(Math.min(duration, (player.seek() || 0) + step));
-      updateProgress();
     }
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       player.seek(Math.max(0, (player.seek() || 0) - step));
-      updateProgress();
     }
   });
 
@@ -247,27 +320,7 @@ function initAudioPlayer() {
     }
   });
 
-  // ── Botão de configurações: mostra/esconde slider de volume ──
-  settingsBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (!volSlider) return;
-    const isVisible = volSlider.classList.toggle('is-visible');
-    settingsBtn.setAttribute('aria-expanded', String(isVisible));
-    settingsBtn.setAttribute('aria-label', isVisible ? 'Fechar configurações' : 'Configurações');
-  });
-
-  // Fecha o painel de configurações ao clicar fora
-  document.addEventListener('click', (e) => {
-    if (volSlider && volSlider.classList.contains('is-visible')) {
-      if (!playerEl.contains(e.target)) {
-        volSlider.classList.remove('is-visible');
-        settingsBtn?.setAttribute('aria-expanded', 'false');
-        settingsBtn?.setAttribute('aria-label', 'Configurações');
-      }
-    }
-  });
-
-  // Controle de volume via slider de configurações (clique na track)
+  // Controle de volume via slider (clique na track)
   const volTrack = volSlider?.querySelector('.audio-player__vol-track');
   volTrack?.addEventListener('click', (e) => {
     const rect = volTrack.getBoundingClientRect();
@@ -281,6 +334,33 @@ function initAudioPlayer() {
       muted = false;
       player.mute(false);
     }
+  });
+
+  // ── Painel de configurações: velocidade de reprodução ──
+  const speedPanel = createSpeedPanel(playerEl);
+
+  settingsBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isVisible = speedPanel.classList.toggle('is-visible');
+    settingsBtn.setAttribute('aria-expanded', String(isVisible));
+    settingsBtn.setAttribute('aria-label', isVisible ? 'Fechar configurações' : 'Configurações');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (speedPanel.classList.contains('is-visible') && !playerEl.contains(e.target) && !speedPanel.contains(e.target)) {
+      speedPanel.classList.remove('is-visible');
+      settingsBtn?.setAttribute('aria-expanded', 'false');
+      settingsBtn?.setAttribute('aria-label', 'Configurações');
+    }
+  });
+
+  speedPanel.querySelectorAll('.speed-option').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const rate = parseFloat(btn.dataset.speed);
+      player.rate(rate);
+      speedPanel.querySelectorAll('.speed-option').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+    });
   });
 }
 
@@ -336,11 +416,39 @@ function initAudioPlayerNative(playerEl, audioEl, source, playBtn, progressBar, 
     if (audioEl.paused) { audioEl.play(); } else { audioEl.pause(); }
   });
 
-  progressBar.addEventListener('click', (event) => {
+  function seekNative(clientX) {
     if (!audioEl.duration) return;
     const rect = progressBar.getBoundingClientRect();
-    audioEl.currentTime = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width)) * audioEl.duration;
+    audioEl.currentTime = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width)) * audioEl.duration;
+  }
+
+  let isDraggingNative = false;
+
+  progressBar.addEventListener('mousedown', (e) => {
+    isDraggingNative = true;
+    seekNative(e.clientX);
+    e.preventDefault();
   });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDraggingNative) return;
+    seekNative(e.clientX);
+  });
+
+  document.addEventListener('mouseup', () => { isDraggingNative = false; });
+
+  progressBar.addEventListener('touchstart', (e) => {
+    isDraggingNative = true;
+    seekNative(e.touches[0].clientX);
+    e.preventDefault();
+  }, { passive: false });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!isDraggingNative) return;
+    seekNative(e.touches[0].clientX);
+  }, { passive: true });
+
+  document.addEventListener('touchend', () => { isDraggingNative = false; });
 
   let muted = false;
   volBtn?.addEventListener('click', () => {
@@ -349,18 +457,27 @@ function initAudioPlayerNative(playerEl, audioEl, source, playBtn, progressBar, 
     if (volFill) volFill.style.width = muted ? '0%' : '70%';
   });
 
+  const speedPanelNative = createSpeedPanel(playerEl);
+
   settingsBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (!volSlider) return;
-    const isVisible = volSlider.classList.toggle('is-visible');
+    const isVisible = speedPanelNative.classList.toggle('is-visible');
     settingsBtn.setAttribute('aria-expanded', String(isVisible));
   });
 
   document.addEventListener('click', (e) => {
-    if (volSlider?.classList.contains('is-visible') && !playerEl.contains(e.target)) {
-      volSlider.classList.remove('is-visible');
+    if (speedPanelNative.classList.contains('is-visible') && !playerEl.contains(e.target) && !speedPanelNative.contains(e.target)) {
+      speedPanelNative.classList.remove('is-visible');
       settingsBtn?.setAttribute('aria-expanded', 'false');
     }
+  });
+
+  speedPanelNative.querySelectorAll('.speed-option').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      audioEl.playbackRate = parseFloat(btn.dataset.speed);
+      speedPanelNative.querySelectorAll('.speed-option').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+    });
   });
 
   const volTrack = volSlider?.querySelector('.audio-player__vol-track');
@@ -376,12 +493,25 @@ function initAudioPlayerNative(playerEl, audioEl, source, playBtn, progressBar, 
    CARDS INTERATIVOS
    ============================================================ */
 function initInteractiveCards() {
-  document.querySelectorAll('.icard').forEach((card) => {
+  const cards = document.querySelectorAll('.icard');
+
+  function closeCard(card) {
+    card.classList.remove('is-open');
+    const btn  = card.querySelector('.icard__open-btn');
+    const back = card.querySelector('.icard__back');
+    if (btn)  { btn.setAttribute('aria-expanded', 'false'); btn.textContent = 'Abrir'; }
+    if (back) back.setAttribute('aria-hidden', 'true');
+  }
+
+  cards.forEach((card) => {
     const openBtn  = card.querySelector('.icard__open-btn');
     const closeBtn = card.querySelector('.icard__close-btn');
     const back     = card.querySelector('.icard__back');
 
     function setOpen(open) {
+      if (open) {
+        cards.forEach((other) => { if (other !== card) closeCard(other); });
+      }
       card.classList.toggle('is-open', open);
       if (openBtn) {
         openBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -389,7 +519,7 @@ function initInteractiveCards() {
       }
       if (back) back.setAttribute('aria-hidden', open ? 'false' : 'true');
       if (open) closeBtn?.focus();
-      else openBtn?.focus();
+      else      openBtn?.focus();
     }
 
     openBtn?.addEventListener('click', () => setOpen(!card.classList.contains('is-open')));
@@ -399,7 +529,9 @@ function initInteractiveCards() {
     });
 
     // Respeita estado inicial do HTML
-    setOpen(card.classList.contains('is-open'));
+    if (card.classList.contains('is-open')) {
+      cards.forEach((other) => { if (other !== card) closeCard(other); });
+    }
   });
 }
 
