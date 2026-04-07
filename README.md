@@ -68,6 +68,7 @@ edtech-challenge/
 | Atividade discursiva | JS: fluxo de estados (editando → respondido → alterando) com persistência |
 | Atividade objetiva | JS: checkbox customizado + detecção de resposta correta via `data-correct` |
 | FAQ / Accordion | `<details>`/`<summary>` **nativo** do HTML5 — sem JS adicional |
+| Botões com estados desabilitados | CSS `:disabled` com ícone de proibição (🚫), animação `pulseDisabled` subtil, grayscale filter |
 | Persistência | `sessionStorage` — restaura texto, feedback, estados e seleções |
 | Scroll Reveal | `IntersectionObserver` API nativa para animações de entrada |
 
@@ -109,6 +110,7 @@ edtech-challenge/
 - **Comportamento exclusivo** — Apenas um card aberto por vez, outros ficam opacos
 - **Animações CSS fluidas** — `fadeIn` e `slideDown` nos feedbacks, transições suaves em todos os componentes
 - **Microinterações refinadas** — Hover nos botões com elevação, dots do slider, opções do quiz
+- **Botões desabilitados com UI visual** — Ícone de proibição (🚫) com animação `pulseDisabled` subtil
 - **Backdrop blur no header** — Efeito glass moderno com `backdrop-filter`
 - **Mockup SVG animado** — Gráfico de linha na hero section com curvas verdes
 - **Persistência inteligente** — Restaura texto, feedback, estados e seleções automaticamente
@@ -183,18 +185,21 @@ edtech-challenge/
 - Hover geral com leve elevação
 
 ### 9. Atividade Discursiva (Essay)
-- Textarea com placeholder e validação de texto
+- Textarea com placeholder, validação de texto e foco com borda verde
 - Estados: **Editando** → **Respondido** → **Alterando**
-- Botão "Responder" ativa/desativa conforme há texto
-- Feedback mostra o texto digitado pelo usuário
-- Botão "Alterar" volta ao modo edição
+- Botão "Responder" desabilitado com ícone de proibição (🚫) e animação pulse
+- Botão "Alterar" desabilitado com mesmo visual
+- Feedback mostra o texto digitado pelo usuário com animação fadeIn
+- Botão "Alterar" volta ao modo edição quando ativado
 - Persistência via `sessionStorage` (chaves: `ESSAY_TEXT`, `ESSAY_ANSWERED`)
 
 ### 10. Atividade Objetiva (Quiz)
 - Checkbox nativo sincronizado com UI visual customizada
 - Detecção automática de resposta correta (via `data-correct="true"`)
 - Feedback diferenciado: **Correto** (verde) vs **Incorreto** (vermelho)
-- Mostrar resposta correta ao final com destaque visual
+- Botão "Responder" desabilitado com ícone de proibição (🚫) e animação pulse
+- Botão "Alterar" desabilitado com mesmo visual até a resposta correta
+- Mostrar resposta correta ao final com destaque visual verde
 - Botão "Tentar Novamente" habilita nova tentativa
 - Persistência via `sessionStorage` (chaves: `QUIZ_SELECTED`, `QUIZ_ANSWERED`)
 
@@ -220,7 +225,14 @@ edtech-challenge/
 - **Transições**: `--transition-fast` (150ms), `--transition-normal` (250ms), `--transition-slow` (400ms)
 - **Sombras**: Múltiplas camadas para profundidade (0 8px 28px, 0 24px 70px, etc.)
 
-### 14. Persistência e Estado
+### 14. Animações CSS Implementadas
+- **`pulseDisabled`**: Animação sutil de pulsação para botões desabilitados (3.5s loop infinito)
+- **`fadeIn`**: Animação de aparição suave para feedbacks e elementos revelados
+- **`slideDown`**: Animação de deslizamento para transições verticais
+- Todas animações usam `ease` timing function para natureza fluida
+- Otimizadas para performance com `transform` e `opacity`
+
+### 15. Persistência e Estado
 - **sessionStorage** para dados temporários da sessão
 - Restauração automática ao recarregar página
 - Estados salvos: texto do essay, respostas do quiz, cards abertos
