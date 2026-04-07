@@ -28,6 +28,7 @@ Acesse: `http://localhost:3000`
 ```
 
 
+
 ---
 
 ## 📁 Estrutura do Projeto
@@ -100,6 +101,7 @@ edtech-challenge/
 
 ---
 
+
 ## ✨ Diferenciais implementados
 
 - **Tema escuro moderno** — Background claro com elementos escuros, paleta verde sofisticada
@@ -117,6 +119,7 @@ edtech-challenge/
 - **Performance otimizada** — Lazy loading, IntersectionObserver, animações GPU-accelerated
 
 ---
+
 
 ## 🎯 Funcionalidades detalhadas
 
@@ -226,6 +229,7 @@ edtech-challenge/
 
 ---
 
+
 ## 💾 Armazenamento (sessionStorage)
 
 A aplicação persiste o seguinte via `sessionStorage` para manter o estado entre recarregamentos:
@@ -244,6 +248,7 @@ A aplicação persiste o seguinte via `sessionStorage` para manter o estado entr
 - Dados persistem apenas durante a sessão do navegador
 
 ---
+
 
 ## 🚀 Como começar a desenvolver
 
@@ -332,7 +337,7 @@ A aplicação persiste o seguinte via `sessionStorage` para manter o estado entr
 
 ## 📝 Arquitetura do código
 
-### Estrutura de módulos JavaScript
+### Estrutura dos módulos JavaScript
 ```javascript
 // main.js - Ponto de entrada único
 document.addEventListener('DOMContentLoaded', () => {
@@ -354,14 +359,14 @@ document.addEventListener('DOMContentLoaded', () => {
 - **Event listeners**: Adicionados apenas quando elementos existem
 - **Feature detection**: Verificação de suporte a APIs modernas
 
-### CSS Architecture
+### Arquitetura do CSS
 - **Design System**: Variáveis CSS para cores, espaçamentos, transições
 - **Component scopes**: Cada componente em seção delimitada por comentários
 - **BEM-like naming**: `.component__element--modifier`
 - **Mobile-first**: Breakpoints progressivos
 - **Performance**: Transforms GPU-accelerated, will-change properties
 
-### HTML Semantics
+### Semantica do HTML
 - **Landmarks**: `<header>`, `<main>`, `<section>`, `<article>`
 - **ARIA attributes**: `aria-expanded`, `aria-live`, `role="note"`
 - **Form controls**: Labels associados, fieldsets para grupos
