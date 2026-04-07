@@ -69,6 +69,7 @@ edtech-challenge/
 | Atividade objetiva | JS: checkbox customizado + detecção de resposta correta via `data-correct` |
 | FAQ / Accordion | `<details>`/`<summary>` **nativo** do HTML5 — sem JS adicional |
 | Botões com estados desabilitados | CSS `:disabled` com ícone de proibição (🚫), animação `pulseDisabled` subtil, grayscale filter |
+| Textos justificados | Justificação tipográfica com `text-align: justify`, `text-align-last: left`, `text-justify: inter-word`, `hyphens: auto` e `overflow-wrap: break-word` |
 | Persistência | `sessionStorage` — restaura texto, feedback, estados e seleções |
 | Scroll Reveal | `IntersectionObserver` API nativa para animações de entrada |
 
@@ -90,6 +91,8 @@ edtech-challenge/
 - Áudio player com `flex-wrap` para mobile
 - Imagem lateral empilha verticalmente em mobile
 - Cards interativos mantêm grid 3-colunas em desktop, ajustam para mobile
+- Botões de ação `Responder` e `Alterar` permanecem lado a lado no desktop e só quebram em bloco no mobile quando não houver espaço suficiente
+- Textos justificados com hyphenation e quebra de linha aprimorada para reduzir espaçamento excessivo em telas estreitas
 
 ### Padrões de código
 - **Clean Code**: funções pequenas (<50 linhas), nomes descritivos em português, sem comentários redundantes
@@ -111,6 +114,7 @@ edtech-challenge/
 - **Animações CSS fluidas** — `fadeIn` e `slideDown` nos feedbacks, transições suaves em todos os componentes
 - **Microinterações refinadas** — Hover nos botões com elevação, dots do slider, opções do quiz
 - **Botões desabilitados com UI visual** — Ícone de proibição (🚫) com animação `pulseDisabled` subtil
+- **Justificação tipográfica refinada** — `text-align: justify` com `hyphens: auto` e `text-align-last: left` para evitar espaços grandes entre palavras
 - **Backdrop blur no header** — Efeito glass moderno com `backdrop-filter`
 - **Mockup SVG animado** — Gráfico de linha na hero section com curvas verdes
 - **Persistência inteligente** — Restaura texto, feedback, estados e seleções automaticamente
